@@ -37,11 +37,19 @@ mongoose.connect(process.env.MONGO_URI);
 // fields, use simple validators like `required` or `unique`, and set
 // `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
 
-// <Your code here >
+var Schema = mongoose.Schema;
 
-var Person /* = <Your Model> */
+var PersonSchema = new Schema({
+  name: { type: String, required: true },
+  age: Number,
+  favoriteFoods: [String]
+});
 
-// **Note**: GoMix is a real server, and in real servers interactions with
+var Person = mongoose.model('Person', PersonSchema);
+// Is validated running on Glitch but not on Cloud9... :(
+// var myPerson = new Person; // Person model is exported instead, see ca. line 280
+
+// **Note**: Glitch is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
 // (e.g. someone hits an endpoint on your API). We'll follow the same approach
 // in these exercises. The `done()` function is a callback that tells us that
