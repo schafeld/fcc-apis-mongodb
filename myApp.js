@@ -46,7 +46,8 @@ var PersonSchema = new Schema({
 });
 
 var Person = mongoose.model('Person', PersonSchema);
-// Is validated running on Glitch but not on Cloud9... :(
+// This task validated running on Glitch but not on Cloud9... :(
+
 // var myPerson = new Person; // Person model is exported instead, see ca. line 280
 
 // **Note**: Glitch is a real server, and in real servers interactions with
@@ -85,10 +86,14 @@ var Person = mongoose.model('Person', PersonSchema);
 // });
 
 var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
+  var person = new Person({name: 'Olli', age: '47', favouriteFoods: ['olives', 'fish']});
 
+  person.save(function (err, data) {
+    if (err) return done(err);
+    return done(null, data);
+  })
 };
+// This task validated running on Glitch but not on Cloud9... :(
 
 /** 4) Create many People with `Model.create()` */
 
