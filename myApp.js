@@ -130,7 +130,12 @@ var createManyPeople = function(arrayOfPeople, done) {
 
 var findPeopleByName = function(personName, done) {
   
-  done(null/*, data*/);
+  Person.find({name: personName}, function (err, data) {
+    if(err) {
+      done(err);
+    }
+    done(null, data);
+  })
 
 };
 
