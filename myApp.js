@@ -86,7 +86,7 @@ var Person = mongoose.model('Person', PersonSchema);
 // });
 
 var createAndSavePerson = function(done) {
-  var person = new Person({name: 'Olli', age: '47', favouriteFoods: ['olives', 'fish']});
+  var person = new Person({name: 'Olli', age: '47', favoriteFoods: ['olives', 'fish']});
 
   person.save(function (err, data) {
     if (err) return done(err);
@@ -104,8 +104,8 @@ var createAndSavePerson = function(done) {
 // Create many people using `Model.create()`, using the function argument
 // 'arrayOfPeople'.
 
-var person1 = new Person({name: 'Albert', age: '30', favouriteFoods: ['kraut', 'bread']});
-var person2 = new Person({name: 'Bruni', age: '40', favouriteFoods: ['salad', 'sausage']});
+var person1 = new Person({name: 'Albert', age: '30', favoriteFoods: ['kraut', 'bread']});
+var person2 = new Person({name: 'Bruni', age: '40', favoriteFoods: ['salad', 'sausage']});
 var arrayOfPeople = [person1, person2];
 
 var createManyPeople = function(arrayOfPeople, done) { 
@@ -150,7 +150,12 @@ var findPeopleByName = function(personName, done) {
 
 var findOneByFood = function(food, done) {
 
-  done(null/*, data*/);
+  Person.findOne({favoriteFoods: food}, function (err, data) {
+    if(err) {
+      done(err);
+    }
+    done(null, data);
+  });
   
 };
 
