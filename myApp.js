@@ -170,7 +170,12 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = function(personId, done) {
   
-  done(null/*, data*/);
+  Person.findById(personId, function (err, data) {
+    if(err) {
+      done(err);
+    }
+    done(null, data);
+  });
   
 };
 
