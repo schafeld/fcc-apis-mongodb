@@ -207,7 +207,16 @@ var findPersonById = function(personId, done) {
 var findEditThenSave = function(personId, done) {
   var foodToAdd = 'hamburger';
   
-  done(null/*, data*/);
+  Person.findById(personId, function(err, data) {
+    if (err) {
+      done(err);
+    }
+
+    data.favoriteFoods.push(foodToAdd);
+    // error handling is mandatory for test to pass
+    // https://www.freecodecamp.org/forum/t/mongodb-and-mongoose-perform-classic-updates-by-running-find-edit-then-save/202813/11
+    data.save((err, data) => (err ? done(err) : done(null, data)));
+  });
 };
 
 /** 9) New Update : Use `findOneAndUpdate()` */
